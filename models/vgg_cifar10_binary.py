@@ -12,7 +12,7 @@ class VGG_Cifar10(nn.Module):
         super(VGG_Cifar10, self).__init__()
         self.infl_ratio=3;
         self.features = nn.Sequential(
-            BinarizeConv2d(3, 128*self.infl_ratio, kernel_size=3, stride=1, padding=1,
+            BinarizeConv2d(24, 128*self.infl_ratio, kernel_size=3, stride=1, padding=1,
                       bias=True),
             nn.BatchNorm2d(128*self.infl_ratio),
             nn.Hardtanh(inplace=True),
@@ -76,5 +76,5 @@ class VGG_Cifar10(nn.Module):
 
 
 def vgg_cifar10_binary(**kwargs):
-    num_classes = getattr(kwargs,'num_classes', 10)
+    num_classes = getattr(kwargs,'num_classes', 100)
     return VGG_Cifar10(num_classes)

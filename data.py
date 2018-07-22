@@ -1,8 +1,9 @@
 import os
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
+from my_dataset import MyDataset
 
-_DATASETS_MAIN_PATH = '/home/Datasets'
+_DATASETS_MAIN_PATH = '../Dataset'
 _dataset_path = {
     'cifar10': os.path.join(_DATASETS_MAIN_PATH, 'CIFAR10'),
     'cifar100': os.path.join(_DATASETS_MAIN_PATH, 'CIFAR100'),
@@ -25,11 +26,16 @@ def get_dataset(name, split='train', transform=None,
                                 target_transform=target_transform,
                                 download=download)
     elif name == 'cifar100':
-        return datasets.CIFAR100(root=_dataset_path['cifar100'],
+        #return datasets.CIFAR100(root=_dataset_path['cifar100'],
+        #                         train=train,
+        #                         transform=transform,
+        #                         target_transform=target_transform,
+        #                         download=download)
+        return MyDataset(root=_dataset_path['cifar10'],
                                  train=train,
                                  transform=transform,
                                  target_transform=target_transform,
-                                 download=download)
+                                 download=download)   
     elif name == 'imagenet':
         path = _dataset_path[name][split]
         return datasets.ImageFolder(root=path,
